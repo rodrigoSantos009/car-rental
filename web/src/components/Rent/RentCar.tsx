@@ -47,6 +47,7 @@ export function RentCar() {
   useEffect(() => {
     fetchData();
   }, []);
+  
   const navigate = useNavigate();
 
   const handleFinish = (carId: string) => {
