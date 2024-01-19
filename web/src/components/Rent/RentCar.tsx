@@ -34,10 +34,18 @@ export function RentCar() {
     car?.rentalPrice
   );
   
+  const fetchData = async () => {
+    try {
+      api.get(`/cars/${carId}`).then((res) => {
+        setCar(res.data);
+      });
+    } catch (error) {
+      console.error("Error fetching car data:", error);
+    }
+  };
+
   useEffect(() => {
-    api.get(`/cars/${carId}`).then((res) => {
-      setCar(res.data);
-    });
+    fetchData();
   }, []);
   const navigate = useNavigate();
 

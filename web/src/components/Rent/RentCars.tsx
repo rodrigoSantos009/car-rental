@@ -5,6 +5,7 @@ import { BsFillPersonFill } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
 import { useRent } from "../../contexts/Rent/Rent";
 import { formattedDates } from "../../util/formattedDates";
+import ReactLoading from "react-loading";
 
 import MainCar from "../../public/main-car.png";
 
@@ -18,13 +19,24 @@ export function RentCars() {
   const rent = useRent();
   const [cars, setCars] = useState<CarsInfo>([])
   const navigate = useNavigate()
+  const [isLoading, setIsloading] = useState(true);
 
   const date = formattedDates(rent.rentDate, rent.returnDate);
 
+  const fetchData = async () => {
+    try {
+      api.get("/cars").then((res) => {
+        setCars(res.data);
+      });
+    } catch (error) {
+      throw new Error();
+    } finally {
+      setIsloading(false);
+    }
+  };
+
   useEffect(() => {
-    api.get("/cars").then((res) => {
-      setCars(res.data);
-    });
+    fetchData();
   }, []);
 
   function handleSelect(data: RentCarType) {
