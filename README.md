@@ -13,3 +13,6 @@ Technologies used in the project:
 *   Nodejs
 *   Prisma
 *   Tailwindcss
+
+<h2>Live</h2>
+https://car-rental-web-sooty.vercel.app/
